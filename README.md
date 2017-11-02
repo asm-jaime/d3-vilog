@@ -1,6 +1,6 @@
 ### d3node-vilog
 
-  Quick visualisation data(array of object) with use d3 and node.
+  Quick visualisation data(array of objects) with use d3node.
   Primarily for visualizing data in tests.
 
 ### install
