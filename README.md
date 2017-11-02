@@ -1,16 +1,16 @@
-# d3node-vilog
+### d3node-vilog
 
   Quick visualisation data(array of object) with use d3 and node.
   Primarily for visualizing data in tests.
 
-# install
+### install
   * `npm install d3node-vilog`
 
-# test
+### test
   * `cd node_modules d3node-vilog`
   * `npm test` or `mocha tests --compilers js:babel-core/register --require babel-polyfill`
   
-# how to use
+### how to use
   * data format:
   ```
   [
@@ -28,10 +28,12 @@
   import { output, line } from 'd3node-vilog';
   
   const log = [];
-  for (let dt = 0; dt < 100; ++dt) {
-    log.push({ key: dt, value: dt });
+  for (let t = 0; t < 100; ++t) {
+    log.push({ key: t, value: t });
   }
   output('./tests/log', line({ data: log }));
 ```
 
-# result
+### result
+
+<img src="https://raw.githubusercontent.com/asm-jaime/d3node-vilog/master/docs/log.svg?sanitize=true">
