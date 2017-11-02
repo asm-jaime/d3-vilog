@@ -1,5 +1,5 @@
 {
-  "name": "d3node-view",
+  "name": "d3node-vilog",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "mocha tests --compilers js:babel-core/register --require babel-polyfill"
   },
   "author": "asm-jaime",
-  "license": "GNU3",
+  "license": "GNU",
   "babel": {
     "presets": [
       "es2015",
