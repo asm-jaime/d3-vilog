@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests --recursive --watch"
+    "test": "mocha tests --compilers js:babel-core/register --require babel-polyfill"
   },
   "author": "asm-jaime",
   "license": "GNU3",
