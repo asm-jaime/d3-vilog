@@ -1,11 +1,11 @@
 'use strict';
 
-import D3Node from 'd3-node';
-import fs from 'fs';
+const D3Node = require('d3-node');
+const fs = require('fs');
 
-export function output(
+module.exports.output = function output( //{{{
   dest, d3n, options = { html: false, svg: true }
-) { //{{{
+) {
   const d3 = d3n.d3;
 
   function eachGeoQuantize() {
@@ -30,9 +30,9 @@ export function output(
       console.log(`>> Exported "${dest}.svg"`);
     });
   }
-} //}}}
+}; //}}}
 
-export function line({ //{{{
+module.exports.line = function line({ //{{{
   data,
   selector: _selector = '#chart',
   container: _container = '<div id="ct"><h2>ch</h2><div id="chart"></div></div>',
