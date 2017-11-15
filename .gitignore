@@ -8,6 +8,8 @@ yarn-error.log*
 tests/log.svg
 tests/log.html
 
+z_buff/
+
 # Runtime data
 pids
 *.pid
