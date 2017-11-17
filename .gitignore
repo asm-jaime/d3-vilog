@@ -5,8 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-tests/log.svg
-tests/log.html
+tests/*.svg
+tests/*.html
 
 z_buff/
 

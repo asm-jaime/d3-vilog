@@ -6,7 +6,7 @@
 import { logger } from '../index.js';
 
 describe('graph', function() {
-  it('clear grpaph: ', function() {
+  it.skip('clear grpaph: ', function() {//{{{
     const data = {
       'nodes': [
         { 'id': '1'},
@@ -21,8 +21,8 @@ describe('graph', function() {
       ]
     };
     logger({data, dest: './tests/clear_graph', type: 'graph' });
-  });
-  it('full cirled grpaph: ', function() {
+  });//}}}
+  it.skip('full cirled grpaph: ', function() {//{{{
     const data = {
       'nodes': [
         { 'id': '1','radius': 5, 'group': 2},
@@ -41,7 +41,7 @@ describe('graph', function() {
       ]
     };
     logger({data, dest: './tests/full_circle_graph', type: 'graph' });
-  });
+  });//}}}
   it('pictured graph: ', function() {
     const data = {
       'nodes': [
