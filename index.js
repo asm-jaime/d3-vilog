@@ -9,15 +9,16 @@ export function logger(options = {}) {//{{{
     dest: './tests/some',
     type: 'graph',
     svg: { width: 900, height: 600 },
+    margin: {top: 50, right: 50, bottom: 50, left: 50}
   };
   options = Object.assign({}, options_def, options);
 
-  const format = new formats[options.type]();
+  const format = new formats[options.type](options);
   const str_style = format.style();
-  const str_script = format.script(options.data);
+  const str_script = format.script();
 
   // main struct
-  const dom = new jsdom.JSDOM('<!DOCTYPE html><p>butth</p>');
+  const dom = new jsdom.JSDOM('<!DOCTYPE html>');
   const doc = dom.window.document;
 
   // set style
@@ -29,8 +30,8 @@ export function logger(options = {}) {//{{{
 
   // set svg
   const svg = doc.createElement('svg');
-  svg.setAttribute('width', options.svg.width);
-  svg.setAttribute('height', options.svg.height);
+  // svg.setAttribute('width', options.svg.width);
+  // svg.setAttribute('height', options.svg.height);
   doc.body.appendChild(svg);
 
   // set d3 script
@@ -52,16 +53,13 @@ export function logger(options = {}) {//{{{
 
 const formats = {//{{{
   graph,
-  line,
+  chart_line,
 };//}}}
 
 // ========== graph
 
-function graph() { //{{{
-  /* return {
-    style: this.style(),
-    script: this.script(data),
-  }; */
+function graph(options) { //{{{
+  this.options = options;
 } //}}}
 
 graph.prototype.style = function() { //{{{
@@ -71,12 +69,21 @@ graph.prototype.style = function() { //{{{
   `;
 }; //}}}
 
-graph.prototype.script = function(data) { //{{{
+graph.prototype.script = function() { //{{{
+  const opt = this.options;
+  const data = this.options.data;
+  // var width = window.innerWidth - ${opt.margin.left} - ${opt.margin.right};
+  // var height = window.innerHeight - ${opt.margin.top} - ${opt.margin.bottom};
+  //
+  // .append('g')
+  //.attr("transform", "translate(" + ${opt.margin.left} + "," + ${opt.margin.top} + ")");
   var script = `
-    var graph = ${JSON.stringify(data)};
-    var svg = d3.select('svg'),
-      width = +svg.attr('width'),
-      height = +svg.attr('height');
+    var width = window.innerWidth - 20;
+    var height = window.innerHeight - 20;
+    var graph = ${JSON.stringify(opt.data)};
+    var svg = d3.select('svg')
+      .attr('width', width)
+      .attr('height', height);
     var color = d3.scaleOrdinal(d3.schemeCategory20);
     var simulation = d3.forceSimulation()
       .force('link', d3.forceLink().id(function(d) { return d.id; })`;
@@ -197,7 +204,7 @@ graph.prototype.script = function(data) { //{{{
 
 // ========== line
 
-function line() { //{{{
+function chart_line() { //{{{
 } //}}}
 
 // ========== formats
