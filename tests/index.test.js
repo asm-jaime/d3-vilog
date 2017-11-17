@@ -5,34 +5,68 @@
 
 import { logger } from '../index.js';
 
-describe('d3-log: ', function() {
-  it('logger: ', function() {
+describe('graph', function() {
+  it('clear grpaph: ', function() {
     const data = {
       'nodes': [
-        { 'id': 'butth1', 'group': 2, 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png'},
-        { 'id': 'butth2', 'group': 2, 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png'},
-        { 'id': 'butth3', 'group': 2, 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png'},
-        { 'id': 'butth4', 'group': 2, 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png'},
+        { 'id': '1'},
+        { 'id': '2'},
+        { 'id': '3'},
+        { 'id': '4'},
       ],
       'links': [
-        { 'source': 'butth1', 'target': 'butth2', 'value': 10 },
-        { 'source': 'butth1', 'target': 'butth3', 'value': 30 },
-        { 'source': 'butth1', 'target': 'butth4', 'value': 1500 },
+        { 'source': '1', 'target': '2', 'width': 10, 'length': 100 },
+        { 'source': '1', 'target': '3', 'width': 30, 'length': 50 },
+        { 'source': '1', 'target': '4', 'width': 15, 'length': 150 },
       ]
     };
-    logger('docs/index', data);
+    logger({data, dest: './tests/clear_graph', type: 'graph' });
   });
-  it.skip('graph: ', function() {
+  it('full cirled grpaph: ', function() {
     const data = {
       'nodes': [
-        { 'id': 'Myriel', 'group': 1 },
-        { 'id': 'Napoleon', 'group': 1 },
+        { 'id': '1','radius': 5, 'group': 2},
+        { 'id': '2','radius': 10, 'group': 2},
+        { 'id': '3','radius': 10, 'group': 4},
+        { 'id': '4','radius': 10, 'group': 4},
+        { 'id': '5','radius': 15, 'group': 4},
+        { 'id': '6','radius': 15, 'group': 4},
       ],
       'links': [
-        { 'source': 'Napoleon', 'target': 'Myriel', 'value': 1 },
-        { 'source': 'Mlle.Baptistine', 'target': 'Myriel', 'value': 8 },
+        { 'source': '1', 'target': '2', 'width': 10, 'length': 100 },
+        { 'source': '1', 'target': '3', 'width': 30, 'length': 300 },
+        { 'source': '1', 'target': '4', 'width': 10, 'length': 150 },
+        { 'source': '4', 'target': '5', 'width': 10, 'length': 250 },
+        { 'source': '4', 'target': '6', 'width': 10, 'length': 250 },
       ]
     };
-    // console.log(graph(data));
+    logger({data, dest: './tests/full_circle_graph', type: 'graph' });
+  });
+  it('pictured graph: ', function() {
+    const data = {
+      'nodes': [
+        { 'id': '1', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/zsb-g_story.png' },
+        { 'id': '2', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/emo-time-good-story.png' },
+        { 'id': '3', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-green.png' },
+        { 'id': '4', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-look.png' },
+        { 'id': '5', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-t-up.png' },
+        { 'id': '6', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-soo.png' },
+        { 'id': '7', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-pojar.png' },
+        { 'id': '8', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-pekach.png' },
+        { 'id': '9', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png' },
+      ],
+      'links': [
+        { 'source': '1', 'target': '2', 'width': 5, 'length': 60 },
+        { 'source': '1', 'target': '9', 'width': 5, 'length': 140 },
+        { 'source': '2', 'target': '9', 'width': 5, 'length': 140 },
+        { 'source': '9', 'target': '3', 'width': 1, 'length': 300 },
+        { 'source': '9', 'target': '4', 'width': 1, 'length': 300 },
+        { 'source': '9', 'target': '5', 'width': 1, 'length': 300 },
+        { 'source': '9', 'target': '6', 'width': 1, 'length': 300 },
+        { 'source': '9', 'target': '7', 'width': 1, 'length': 300 },
+        { 'source': '9', 'target': '8', 'width': 1, 'length': 300 },
+      ]
+    };
+    logger({data, dest: './tests/pictured_graph', type: 'graph' });
   });
 });

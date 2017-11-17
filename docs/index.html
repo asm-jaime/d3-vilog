@@ -1,11 +1,15 @@
-<!DOCTYPE html><html><head><style type="text/css">.links line { stroke: #999; stroke-opacity: 0.6; stroke-width: 10px; } .nodes circle { stroke: #fff; stroke-width: 0.5px; }</style></head><body><p>butth</p><svg width="900" height="600"></svg><script src="https://d3js.org/d3.v4.min.js"></script><script>
-    var graph = {"nodes":[{"id":"butth1","group":2,"href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png"},{"id":"butth2","group":2,"href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png"},{"id":"butth3","group":2,"href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png"},{"id":"butth4","group":2,"href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png"}],"links":[{"source":"butth1","target":"butth2","value":10},{"source":"butth1","target":"butth3","value":30},{"source":"butth1","target":"butth4","value":1500}]};
+<!DOCTYPE html><html><head><style type="text/css">
+    .links line { stroke: #999; stroke-opacity: 0.6; }
+    .nodes circle { stroke: #fff; stroke-width: 0.5px; }
+  </style></head><body><p>butth</p><svg width="900" height="600"></svg><script src="https://d3js.org/d3.v4.min.js"></script><script>
+    var graph = {"nodes":[{"id":"1","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/zsb-g_story.png"},{"id":"2","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/emo-time-good-story.png"},{"id":"3","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-green.png"},{"id":"4","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-look.png"},{"id":"5","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-t-up.png"},{"id":"6","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-soo.png"},{"id":"7","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-pojar.png"},{"id":"8","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/yoba-pekach.png"},{"id":"9","href":"https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/butth-l.png"}],"links":[{"source":"1","target":"2","width":5,"length":60},{"source":"1","target":"9","width":5,"length":140},{"source":"2","target":"9","width":5,"length":140},{"source":"9","target":"3","width":1,"length":300},{"source":"9","target":"4","width":1,"length":300},{"source":"9","target":"5","width":1,"length":300},{"source":"9","target":"6","width":1,"length":300},{"source":"9","target":"7","width":1,"length":300},{"source":"9","target":"8","width":1,"length":300}]};
     var svg = d3.select('svg'),
       width = +svg.attr('width'),
       height = +svg.attr('height');
     var color = d3.scaleOrdinal(d3.schemeCategory20);
     var simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().distance(120).id(function(d) { return d.id; }))
+      .force('link', d3.forceLink().id(function(d) { return d.id; })
+      .distance(function(d) {return d.length;}))
       .force('charge', d3.forceManyBody())
       .force('center', d3.forceCenter(width / 2, height / 2));
     var link = svg.append('g')
@@ -13,31 +17,22 @@
       .selectAll('line')
       .data(graph.links)
       .enter().append('line')
-      .attr('stroke-width', function(d) { return Math.sqrt(d.value); });
+    .attr('stroke-width', function(d) { return d.width; })
     var node = svg.append('g')
       .attr('class', 'nodes')
       .selectAll('circle')
       .data(graph.nodes)
       .enter()
       .append('image')
-      .attr('width', 64)
-      .attr('height', 64)
-      .attr("xlink:href", function(d) { return d.href})
+      .attr('width', 32)
+      .attr('height', 32)
+      .attr('xlink:href', function(d) { return d.href})
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
         .on('end', dragended));
-      //.append('circle')
-      //.attr('r', 5)
-      //.attr('fill', function(d) { return color(d.group); })
     node.append('title')
       .text(function(d) { return d.id; });
-    // node.append('svg:image')
-      // .attr('x', -9)
-      // .attr('y', -12)
-      // .attr('width', 20)
-      // .attr('height', 24)
-      // .attr("xlink:href", function(d) { return d.href});
     simulation
       .nodes(graph.nodes)
       .on('tick', ticked);
@@ -49,9 +44,9 @@
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
         .attr('y2', function(d) { return d.target.y; });
-      node
-        .attr('x', function(d) { return d.x - 32; })
-        .attr('y', function(d) { return d.y - 32; });
+    node
+      .attr('x', function(d) { return d.x - 16; })
+      .attr('y', function(d) { return d.y - 16; });
     }
     function dragstarted(d) {
       if (!d3.event.active) simulation.alphaTarget(0.3).restart();
