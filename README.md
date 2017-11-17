@@ -1,31 +1,34 @@
-### d3node-vilog
+### d3-vilog
 
-  Quick visualisation data(array of objects) with use d3node.
+  Quick node-visualisation data with use d3.
   Primarily for visualizing data in tests.
 
 ### install
-  * `npm install d3node-vilog`
+  * `npm install d3-vilog`
 
 ### test
-  * `cd node_modules d3node-vilog`
+  * `cd node_modules d3-vilog`
   * `npm test` or `mocha tests --compilers js:babel-core/register --require babel-polyfill`
   
 ### how to use
+
+#### line
+
   * data format:
   ```
   [
-    {key: 0, value: 0.1},
-    {key: 1, value: 0.1},
-    {key: 2, value: 0.2},
-    {key: 3, value: 0.3},
-    {key: 4, value: 0.3},
+    {y1: 0, y2: 0.1, ...},
+    {y1: 1, y2: 0.1, ...},
+    {y1: 2, y2: 0.2, ...},
+    {y1: 3, y2: 0.3, ...},
+    {y1: 4, y2: 0.3, ...},
     ...
   ]
   ```
   * Example:
 
 ```javascript
-  import { output, line } from 'd3node-vilog';
+  import { output, line } from 'd3-vilog';
   
   const log = [];
   for (let t = 0; t < 100; ++t) {
@@ -36,4 +39,4 @@
 
 ### result
 
-<img src="https://raw.githubusercontent.com/asm-jaime/d3node-vilog/master/docs/log.svg?sanitize=true">
+<img src="https://raw.githubusercontent.com/asm-jaime/d3-vilog/master/docs/examples.png?sanitize=true">
