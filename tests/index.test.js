@@ -42,7 +42,7 @@ describe('graph', function() {
     };
     logger({data, dest: './tests/full_circle_graph', type: 'graph' });
   });//}}}
-  it('pictured graph: ', function() {
+  it.skip('pictured graph: ', function() {//{{{
     const data = {
       'nodes': [
         { 'id': '1', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/zsb-g_story.png' },
@@ -68,5 +68,19 @@ describe('graph', function() {
       ]
     };
     logger({data, dest: './tests/pictured_graph', type: 'graph' });
-  });
+  });//}}}
+  it('big graph: ', function() {//{{{
+    const nodes = [];
+    const links = [];
+    const node = { 'id': '0','radius': 5, 'group': 2};
+    nodes.push(node);
+    for(let i = 1; i < 1000; ++i){
+      const node = { 'id': i.toString(),'radius': 5, 'group': 2};
+      const link = { 'source': (i-1).toString(), 'target': node.id, 'width': 10, 'length': 100 };
+      nodes.push(node);
+      links.push(link);
+    }
+    const data = {nodes, links};
+    logger({data, dest: './tests/big_graph', type: 'graph' });
+  });//}}}
 });
