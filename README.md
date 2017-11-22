@@ -1,16 +1,11 @@
-### d3-vilog
 
-  Quick node-visualisation data with use d3.
+### Why?
+
+  If you have a data want to visualize it with use node, use it!
   Primarily for visualizing data in tests.
 
 ### install
   * `npm install d3-vilog`
-
-### test
-  * `cd node_modules d3-vilog`
-  * `npm test` or `mocha tests --compilers js:babel-core/register --require babel-polyfill`
-  
-### how to use
 
 #### line
 
