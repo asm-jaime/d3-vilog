@@ -49,7 +49,7 @@
     ];
   }
 
-  logger({ data: generateData(), dest: './tests/clear_line', type: 'line' });
+  logger({ data: generateData(), dest: './line', type: 'line' });
 ```
 
 #### data to graph
