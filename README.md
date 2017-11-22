@@ -1,4 +1,4 @@
-### Appointment
+### d3-vilog: logger(data) ===build===> data.html
   
   Quickly generate an \*.html file with visualization of the a structured data.
 
@@ -108,3 +108,7 @@
   };
   logger({ data, dest: './cgraph', type: 'graph' });
 ```
+
+### Result
+
+  * https://asm-jaime.github.io/d3-vilog/
