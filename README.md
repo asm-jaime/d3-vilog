@@ -1,6 +1,12 @@
 ### d3-vilog: logger(data) ===build===> data.html
   
   Quickly generate an \*.html file with visualization of the a structured data.
+  
+  List of available views:
+  * line (check)
+  * graph (check)
+  * 2d points (in progress)
+  * 3d points (in progress)
 
 ### install
   * `npm install d3-vilog`
