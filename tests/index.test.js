@@ -1,12 +1,10 @@
 'use strict';
 
-// import chai from 'chai';
-// const expect = chai.expect;
-
-import { logger } from '../index.js';
+const path = require('path');
+const logger = require('../index.js');
 
 describe('graph', function() {
-  it.skip('clear grpaph: ', function() { //{{{
+  it.skip('clear grpaph: ', function() {
     const data = {
       'nodes': [
         { 'id': '1' },
@@ -21,8 +19,8 @@ describe('graph', function() {
       ]
     };
     logger({ data, dest: './tests/clear_graph', type: 'graph' });
-  }); //}}}
-  it.skip('full cirled grpaph: ', function() { //{{{
+  });
+  it.skip('full cirled grpaph: ', function() {
     const data = {
       'nodes': [
         { 'id': '1', 'radius': 5, 'group': 2 },
@@ -41,8 +39,8 @@ describe('graph', function() {
       ]
     };
     logger({ data, dest: './tests/full_circle_graph', type: 'graph' });
-  }); //}}}
-  it.skip('pictured graph: ', function() { //{{{
+  });
+  it.skip('pictured graph: ', function() {
     const data = {
       'nodes': [
         { 'id': '1', 'href': 'https://raw.githubusercontent.com/asm-jaime/yoba-package/master/pic.size(128x128)/zsb-g_story.png' },
@@ -68,8 +66,8 @@ describe('graph', function() {
       ]
     };
     logger({ data, dest: './tests/pictured_graph', type: 'graph' });
-  }); //}}}
-  it.skip('big graph: ', function() { //{{{
+  });
+  it.skip('big graph: ', function() {
     const nodes = [];
     const links = [];
     const node = { 'id': '0', 'radius': 5, 'group': 2 };
@@ -82,11 +80,11 @@ describe('graph', function() {
     }
     const data = { nodes, links };
     logger({ data, dest: './tests/big_graph', type: 'graph' });
-  }); //}}}
+  });
 });
 
 describe('line', function() {
-  it('line: ', function() {//{{{
+  it('line: ', function() {
     function generateData() {
       const fst = [],
         snd = [],
@@ -115,6 +113,6 @@ describe('line', function() {
       ];
     }
 
-    logger({ data: generateData(), dest: './tests/clear_line', type: 'line' });
-  });//}}}
+    logger({ data: generateData(), dest: path.join(__dirname, 'clear_line'), type: 'line' });
+  });
 });

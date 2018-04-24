@@ -1,12 +1,12 @@
 'use strict';
 
 const jsdom = require('jsdom');
-const fs = require('fs');
+const writeFile = require('fs').writeFile;
 
-export function logger(options = {}) {//{{{
+const logger = function(options = {}) {
   const options_def = {
     data: {},
-    dest: './tests/some',
+    dest: 'some_data',
     type: 'graph',
     svg: { width: 900, height: 600 },
     margin: {top: 50, right: 50, bottom: 50, left: 50}
@@ -21,25 +21,26 @@ export function logger(options = {}) {//{{{
   format.import_style();
   format.import_scripts();
 
-  fs.writeFileSync(`${options.dest}.html`, dom.serialize(), function() {
-    console.log(`>> Exported '${options.dest}.html', open in a web browser`);
+  writeFile(`${options.dest}.html`, dom.serialize(), {}, function() {
+    console.log(`>> Exported ${options.dest}.html, open in a web browser`);
   });
-}//}}}
+}
+module.exports = logger;
 
 // ========== enum all formats
 
-const formats = {//{{{
+const formats = {
   graph,
   line,
-};//}}}
+};
 
 // ========== graph
 
-function graph(options) { //{{{
+function graph(options) {
   this.options = options;
-} //}}}
+}
 
-graph.prototype.import_style = function() { //{{{
+graph.prototype.import_style = function() {
   const doc = this.options.doc;
   const head = doc.getElementsByTagName('head')[0];
   const style = doc.createElement('style');
@@ -49,9 +50,9 @@ graph.prototype.import_style = function() { //{{{
     .nodes circle { stroke: #fff; stroke-width: 0.5px; }
   `;
   head.appendChild(style);
-}; //}}}
+};
 
-graph.prototype.import_scripts = function() { //{{{
+graph.prototype.import_scripts = function() {
   const d3_script = this.options.doc.createElement('script');
   d3_script.src = 'https://d3js.org/d3.v4.min.js';
   this.options.doc.body.appendChild(d3_script);
@@ -59,9 +60,9 @@ graph.prototype.import_scripts = function() { //{{{
   const format_script = this.options.doc.createElement('script');
   format_script.textContent = this.main_script();
   this.options.doc.body.appendChild(format_script);
-}; //}}}
+};
 
-graph.prototype.main_script = function() { //{{{
+graph.prototype.main_script = function() {
   const data = this.options.data;
   console.log(data);
   var script = `
@@ -187,15 +188,15 @@ graph.prototype.main_script = function() { //{{{
       d.fy = null;
     }`;
   return script;
-}; //}}}
+};
 
 // ========== line
 
-function line(options) { //{{{
+function line(options) {
   this.options = options;
-} //}}}
+}
 
-line.prototype.import_style = function() { //{{{
+line.prototype.import_style = function() {
   const doc = this.options.doc;
   const head = doc.getElementsByTagName('head')[0];
   const style = doc.createElement('style');
@@ -322,9 +323,9 @@ text {
 }`;
 
   head.appendChild(style);
-}; //}}}
+};
 
-line.prototype.import_scripts = function() { //{{{
+line.prototype.import_scripts = function() {
   const d3 = this.options.doc.createElement('script');
   d3.src = 'https://d3js.org/d3.v2.min.js';
   this.options.doc.body.appendChild(d3);
@@ -336,9 +337,9 @@ line.prototype.import_scripts = function() { //{{{
   const main = this.options.doc.createElement('script');
   main.textContent = this.main_script();
   this.options.doc.body.appendChild(main);
-}; //}}}
+};
 
-line.prototype.main_script = function() { //{{{
+line.prototype.main_script = function() {
   const res_data = this.options.data;
   const script =`
 function log(text) {
@@ -962,4 +963,4 @@ $(document).ready(function() {
 });
 `;
   return script;
-}; //}}}
+};
