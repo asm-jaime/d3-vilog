@@ -1,8 +1,8 @@
 ### d3-vilog: logger(data) ===build===> data.html
   
-  Quickly generate an \*.html file with visualization of the a structured data.
+  Quick generate a \*.html file with visualization of a data.
   
-  List of available views:
+  List of available type views:
   * line (check)
   * graph (check)
   * 2d points (in progress)
@@ -10,7 +10,16 @@
 
 ### install
   * `npm install d3-vilog`
+
+#### options logger(options) function
   
+  The argument of the logger function is an object like `{ data: some_data, dest: __dirname, type: 'line', import: 'local'}`. Here's the properties:
+  
+  * `data` {`[]`, `{}`, ...} : a data which you want to visualize
+  * `dest` {`__dirname`, `/home/user/documents`, `./`} : path, where you want to allocate result
+  * `type` {`graph`, `line`} : type or form of visualization
+  * `import` {`local`, `extern` } : locally or from outside to take library files
+
 #### data to line
 
   * data structure: 
@@ -26,8 +35,9 @@
   
   ```javascript
   import { logger } from 'd3-vilog';
+  // const logger = require('d3-vilog').logger;
   
-  function generateData() {
+  function gen_data() {
     const fst = [],
       snd = [],
       trd = [],
@@ -55,7 +65,7 @@
     ];
   }
 
-  logger({ data: generateData(), dest: './line', type: 'line' });
+  logger({ data: gen_data(), dest: './', type: 'line', import: 'extern' });
 ```
 
 #### data to graph
@@ -98,6 +108,7 @@
 
 ```javascript
   import { logger } from 'd3-vilog';
+  // const logger = require('d3-vilog').logger;
   
   const data = {
     'nodes': [
@@ -112,7 +123,7 @@
       { 'source': '1', 'target': '4', 'width': 15, 'length': 150 },
     ]
   };
-  logger({ data, dest: './cgraph', type: 'graph' });
+  logger({ data, dest: './', type: 'graph', import: 'local' });
 ```
 
 ### Result
