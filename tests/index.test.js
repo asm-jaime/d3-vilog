@@ -18,7 +18,7 @@ describe('graph', function() {
         { 'source': '1', 'target': '4', 'width': 15, 'length': 150 },
       ]
     };
-    logger({ data, dest: './tests/clear_graph', type: 'graph' });
+    logger({ data, dest: path.join(__dirname, 'clear_graph'), type: 'graph' });
   });
   it.skip('full cirled grpaph: ', function() {
     const data = {
@@ -38,7 +38,7 @@ describe('graph', function() {
         { 'source': '4', 'target': '6', 'width': 10, 'length': 250 },
       ]
     };
-    logger({ data, dest: './tests/full_circle_graph', type: 'graph' });
+    logger({ data, dest: path.join(__dirname, 'full_circle_graph'), type: 'graph' });
   });
   it.skip('pictured graph: ', function() {
     const data = {
@@ -65,7 +65,7 @@ describe('graph', function() {
         { 'source': '9', 'target': '8', 'width': 1, 'length': 300 },
       ]
     };
-    logger({ data, dest: './tests/pictured_graph', type: 'graph' });
+    logger({ data, dest: path.join(__dirname, 'pictured_graph'), type: 'graph' });
   });
   it.skip('big graph: ', function() {
     const nodes = [];
@@ -79,7 +79,7 @@ describe('graph', function() {
       links.push(link);
     }
     const data = { nodes, links };
-    logger({ data, dest: './tests/big_graph', type: 'graph' });
+    logger({ data, dest: path.join(__dirname, 'big_graph'), type: 'graph' });
   });
 });
 
