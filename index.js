@@ -1,12 +1,15 @@
 'use strict';
 
+const path = require('path');
+const fs = require('fs');
+
 const jsdom = require('jsdom');
-const writeFile = require('fs').writeFile;
 
 const logger = function(options = {}) {
   const options_def = {
     data: {},
     dest: 'some_data',
+    import: 'external',
     type: 'graph',
     svg: { width: 900, height: 600 },
     margin: {top: 50, right: 50, bottom: 50, left: 50}
@@ -21,10 +24,11 @@ const logger = function(options = {}) {
   format.import_style();
   format.import_scripts();
 
-  writeFile(`${options.dest}.html`, dom.serialize(), {}, function() {
-    console.log(`>> Exported ${options.dest}.html, open in a web browser`);
-  });
+  fs.writeFile(`${options.dest}/${options.type}_data.html`, dom.serialize(), {},
+    () => { console.log(`>> you can open ${options.type}_data.html in a web browser`); }
+  );
 }
+
 module.exports.logger = logger;
 
 // ========== enum all formats
@@ -54,7 +58,15 @@ graph.prototype.import_style = function() {
 
 graph.prototype.import_scripts = function() {
   const d3_script = this.options.doc.createElement('script');
-  d3_script.src = 'https://d3js.org/d3.v4.min.js';
+
+  if(this.options.import === 'local') {
+    fs.createReadStream(path.join(__dirname, 'utils/d3.v4.min.js'))
+        .pipe(fs.createWriteStream(`${this.options.dest}/d3.v4.min.js`));
+    d3_script.src = 'd3.v4.min.js';
+  } else {
+    d3_script.src = 'https://d3js.org/d3.v4.min.js';
+  }
+
   this.options.doc.body.appendChild(d3_script);
 
   const format_script = this.options.doc.createElement('script');
@@ -327,11 +339,20 @@ text {
 
 line.prototype.import_scripts = function() {
   const d3 = this.options.doc.createElement('script');
-  d3.src = 'https://d3js.org/d3.v2.min.js';
-  this.options.doc.body.appendChild(d3);
-
   const jq = this.options.doc.createElement('script');
-  jq.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+  if(this.options.import === 'local') {
+    fs.createReadStream(path.join(__dirname, 'utils/d3.v2.min.js'))
+        .pipe(fs.createWriteStream(`${this.options.dest}/d3.v2.min.js`));
+    fs.createReadStream(path.join(__dirname, 'utils/jquery.min.js'))
+        .pipe(fs.createWriteStream(`${this.options.dest}/jquery.min.js`));
+    d3.src = 'd3.v2.min.js';
+    jq.src = 'jquery.min.js';
+  } else {
+    d3.src = 'https://d3js.org/d3.v2.min.js';
+    jq.src = 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+  }
+
+  this.options.doc.body.appendChild(d3);
   this.options.doc.body.appendChild(jq);
 
   const main = this.options.doc.createElement('script');
