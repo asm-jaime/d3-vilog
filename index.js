@@ -25,7 +25,7 @@ const logger = function(options = {}) {
     console.log(`>> Exported ${options.dest}.html, open in a web browser`);
   });
 }
-module.exports = logger;
+module.exports.logger = logger;
 
 // ========== enum all formats
 

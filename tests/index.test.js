@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const logger = require('../index.js');
+const logger = require('../index.js').logger;
 
 describe('graph', function() {
   it.skip('clear grpaph: ', function() {
