@@ -8,7 +8,8 @@ const jsdom = require('jsdom');
 const logger = function(options = {}) {
   const options_def = {
     data: {},
-    dest: 'some_data',
+    dest: '.',
+    name: '',
     import: 'external',
     type: 'graph',
     svg: { width: 900, height: 600 },
@@ -24,7 +25,9 @@ const logger = function(options = {}) {
   format.import_style();
   format.import_scripts();
 
-  fs.writeFile(`${options.dest}/${options.type}_data.html`, dom.serialize(), {},
+  fs.writeFile(
+    `${options.dest}/${options.name}_${options.type}.html`,
+    dom.serialize(), {},
     () => { console.log(`>> you can open ${options.type}_data.html in a web browser`); }
   );
 }

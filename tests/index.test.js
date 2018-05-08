@@ -113,6 +113,10 @@ describe('line', function() {
       ];
     }
 
-    logger({ data: generateData(), dest: __dirname, type: 'line', import: 'extern'});
+    logger({
+      data: generateData(),
+      dest: __dirname, name: 'periodic', type: 'line',
+      import: 'extern'
+    });
   });
 });
